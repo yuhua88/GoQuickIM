@@ -4,6 +4,7 @@ import (
 	"GoQuickIM/config"
 	"GoQuickIM/proto"
 	"context"
+	"strings"
 	"sync"
 	"time"
 
@@ -36,7 +37,7 @@ func InitLogicRpcClient() {
 		d, err := etcdV3.NewEtcdV3Discovery(
 			config.Conf.Common.CommonEtcd.BasePath,
 			config.Conf.Common.CommonEtcd.ServerPathLogic,
-			[]string{config.Conf.Common.CommonEtcd.Host},
+			strings.Split(config.Conf.Common.CommonEtcd.Host, ","),
 			true,
 			etcdConfigOption,
 		)

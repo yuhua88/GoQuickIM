@@ -47,7 +47,7 @@ func (task *Task) InitConnectRpcClient() (err error) {
 	d, e := etcdV3.NewEtcdV3Discovery(
 		etcdConfig.BasePath,
 		etcdConfig.ServerPathConnect,
-		[]string{etcdConfig.Host},
+		strings.Split(config.Conf.Common.CommonEtcd.Host, ","),
 		true,
 		etcdConfigOption,
 	)

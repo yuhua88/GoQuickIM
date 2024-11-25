@@ -101,7 +101,7 @@ func (c *Connect) createConnectWebsocketsRpcServer(network, addr string) {
 func addRegistryPlugin(s *server.Server, network, addr string) {
 	r := &serverplugin.EtcdV3RegisterPlugin{
 		ServiceAddress: network + "@" + addr,
-		EtcdServers:    []string{config.Conf.Common.CommonEtcd.Host},
+		EtcdServers:    strings.Split(config.Conf.Common.CommonEtcd.Host, ","),
 		BasePath:       config.Conf.Common.CommonEtcd.BasePath,
 		Metrics:        metrics.NewRegistry(),
 		UpdateInterval: time.Minute,
@@ -147,7 +147,7 @@ func (c *Connect) InitLogicRpcClient() (err error) {
 		d, e := etcdV3.NewEtcdV3Discovery(
 			config.Conf.Common.CommonEtcd.BasePath,
 			config.Conf.Common.CommonEtcd.ServerPathLogic,
-			[]string{config.Conf.Common.CommonEtcd.Host},
+			strings.Split(config.Conf.Common.CommonEtcd.Host, ","),
 			true,
 			etcdConfigOption,
 		)

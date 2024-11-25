@@ -71,7 +71,7 @@ func (logic *Logic) createRpcServer(network, addr string) {
 func (logic *Logic) addRegistryPlugin(s *server.Server, network, addr string) {
 	r := &serverplugin.EtcdV3RegisterPlugin{
 		ServiceAddress: network + "@" + addr,
-		EtcdServers:    []string{config.Conf.Common.CommonEtcd.Host},
+		EtcdServers:    strings.Split(config.Conf.Common.CommonEtcd.Host, ","),
 		BasePath:       config.Conf.Common.CommonEtcd.BasePath,
 		//Watch Server Health status
 		Metrics:        metrics.NewRegistry(),
