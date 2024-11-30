@@ -27,6 +27,7 @@ func (rpc *RpcLogic) Register(ctx context.Context, args *proto.RegisterRequest, 
 	u.UserName = args.Name
 	u.Password = args.PassWord
 
+	//add user in db
 	userId, err := u.Add()
 
 	if err != nil {
