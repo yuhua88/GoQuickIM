@@ -3,6 +3,7 @@ package db
 import (
 	"GoQuickIM/config"
 	"fmt"
+	"path/filepath"
 	"sync"
 	"time"
 
@@ -31,9 +32,20 @@ func initDB(dbName string) {
 	mysqlDSN := config.Conf.Common.CommonMySql
 	mysqlDSN.Db = dbName
 	dsn := parseMysqlDSN(mysqlDSN)
+
+	realPath, _ := filepath.Abs("./")
+	configFilePath := realPath + "/db/gochat.sqlite3"
+	use_mysql := 0
+
 	syncLock.Lock()
 	defer syncLock.Unlock()
-	dbMap[dbName], e = gorm.Open("mysql", dsn)
+	if use_mysql == 1 {
+		dbMap[dbName], e = gorm.Open("mysql", dsn)
+	} else {
+
+		dbMap[dbName], e = gorm.Open("sqlite3", configFilePath)
+	}
+
 	dbMap[dbName].DB().SetMaxIdleConns(4)
 	dbMap[dbName].DB().SetMaxOpenConns(20)
 	dbMap[dbName].DB().SetConnMaxLifetime(8 * time.Second)
