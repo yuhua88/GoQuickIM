@@ -207,10 +207,16 @@ type CommonRedis struct {
 	RedisPassword string `mapstructure:"redisPassword"`
 	Db            int    `mapstructure:"db"`
 }
-
+type CommonMySql struct {
+	UserName string `mapstructure:"userName"`
+	Password string `mapstructure:"password"`
+	Host     string `mapstructure:"host"`
+	Db       string `mapstructure:"db"`
+}
 type Common struct {
 	CommonEtcd  CommonEtcd  `mapstructure:"common-etcd"`
 	CommonRedis CommonRedis `mapstructure:"common-redis"`
+	CommonMySql CommonMySql `mapstructure:"common-mysql"`
 }
 
 type SiteBase struct {

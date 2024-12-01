@@ -11,3 +11,9 @@ connectionTimeout = 5
 redisAddress = "127.0.0.1:6379"
 redisPassword = ""
 db = 0
+
+[common-mysql]
+userName = "root"
+password = "boyu"
+host = "localhost"
+db = "gochat"
